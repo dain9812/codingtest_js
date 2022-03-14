@@ -9,10 +9,12 @@ for (let i = 1; i <= n; i++) {
 
 let d = new Array(k + 1).fill(10001);
 d[0] = 0;
-for (let i = 0; i < n; i++) {
-  for (let j = arr[i]; j <= k; j++) {
-    if (d[j - arr[i]] !== 10001) {
-      d[j] = Math.min(d[j], d[j - arr[i]] + 1);
+for (let coin of arr) {
+  for (let x = 0; x <= k - coin; x++) {
+    // x원을 만들 수 있는지 확인
+    if (d[x] !== 10001) {
+      // x원을 만들 수 있다면, (x + coin)원도 만들 수 있음
+      d[x + coin] = Math.min(d[x + coin], d[x] + 1);
     }
   }
 }
